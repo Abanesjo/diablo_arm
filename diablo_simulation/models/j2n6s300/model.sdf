@@ -1,0 +1,816 @@
+<sdf version='1.7'>
+  <model name='j2n6s300'>
+    <joint name='connect_root_and_world' type='fixed'>
+      <pose relative_to='__model__'>0 0 0 0 -0 0</pose>
+      <parent>world</parent>
+      <child>root</child>
+    </joint>
+    <link name='root'>
+      <pose relative_to='connect_root_and_world'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0.1255 0 -0 0</pose>
+        <mass>0.46784</mass>
+        <inertia>
+          <ixx>0.000951271</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000951271</iyy>
+          <iyz>0</iyz>
+          <izz>0.000374272</izz>
+        </inertia>
+      </inertial>
+      <collision name='root_fixed_joint_lump__j2n6s300_link_base_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/base.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='root_fixed_joint_lump__j2n6s300_link_base_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/base.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_1' type='revolute'>
+      <pose relative_to='root'>0 0 0.15675 3.14159 0 3.14159</pose>
+      <parent>root</parent>
+      <child>j2n6s300_link_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>40</effort>
+          <velocity>0.628319</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_1'>
+      <pose relative_to='j2n6s300_joint_1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.002 -0.0605 0 -0 0</pose>
+        <mass>0.7477</mass>
+        <inertia>
+          <ixx>0.00152032</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00152032</iyy>
+          <iyz>0</iyz>
+          <izz>0.00059816</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_1_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/shoulder.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_1_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/shoulder.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_1_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_big.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_2' type='revolute'>
+      <pose relative_to='j2n6s300_link_1'>0 0.0016 -0.11875 -1.5708 -0 3.14159</pose>
+      <parent>j2n6s300_link_1</parent>
+      <child>j2n6s300_link_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0.820305</lower>
+          <upper>5.46288</upper>
+          <effort>80</effort>
+          <velocity>0.628319</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_2'>
+      <pose relative_to='j2n6s300_joint_2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.2065 -0.01 0 -0 0</pose>
+        <mass>0.99</mass>
+        <inertia>
+          <ixx>0.0105022</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000792</iyy>
+          <iyz>0</iyz>
+          <izz>0.0105022</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_2_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/arm.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_2_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/arm.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_2_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_big.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_3' type='revolute'>
+      <pose relative_to='j2n6s300_link_2'>0 -0.41 0 3.14159 0 3.14159</pose>
+      <parent>j2n6s300_link_2</parent>
+      <child>j2n6s300_link_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0.331613</lower>
+          <upper>5.95157</upper>
+          <effort>40</effort>
+          <velocity>0.628319</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_3'>
+      <pose relative_to='j2n6s300_joint_3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0.081 -0.0086 0 -0 0</pose>
+        <mass>0.6763</mass>
+        <inertia>
+          <ixx>0.00142022</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000304335</iyy>
+          <iyz>0</iyz>
+          <izz>0.00142022</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_3_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/forearm.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_3_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/forearm.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_3_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_big.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_4' type='revolute'>
+      <pose relative_to='j2n6s300_link_3'>0 0.2073 -0.0114 -1.5708 -0 3.14159</pose>
+      <parent>j2n6s300_link_3</parent>
+      <child>j2n6s300_link_4</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>20</effort>
+          <velocity>0.837758</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_4'>
+      <pose relative_to='j2n6s300_joint_4'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.037 -0.0642 0 -0 0</pose>
+        <mass>0.426367</mass>
+        <inertia>
+          <ixx>7.73497e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.73497e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001428</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_4_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/wrist.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_4_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/wrist.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_4_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_small.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_5' type='revolute'>
+      <pose relative_to='j2n6s300_link_4'>0 -0.03703 -0.06414 1.0472 -0 3.14159</pose>
+      <parent>j2n6s300_link_4</parent>
+      <child>j2n6s300_link_5</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>20</effort>
+          <velocity>0.837758</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_5'>
+      <pose relative_to='j2n6s300_joint_5'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.037 -0.0642 0 -0 0</pose>
+        <mass>0.426367</mass>
+        <inertia>
+          <ixx>7.73497e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.73497e-05</iyy>
+          <iyz>0</iyz>
+          <izz>0.0001428</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_5_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/wrist.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_5_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/wrist.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_5_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_small.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_6' type='revolute'>
+      <pose relative_to='j2n6s300_link_5'>0 -0.03703 -0.06414 1.0472 -0 3.14159</pose>
+      <parent>j2n6s300_link_5</parent>
+      <child>j2n6s300_link_6</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <effort>20</effort>
+          <velocity>0.837758</velocity>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>0</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+      <physics>
+        <provide_feedback>1</provide_feedback>
+        <ode>
+          <limit>
+            <cfm>0</cfm>
+            <erp>0.2</erp>
+          </limit>
+          <provide_feedback>1</provide_feedback>
+        </ode>
+      </physics>
+    </joint>
+    <link name='j2n6s300_link_6'>
+      <pose relative_to='j2n6s300_joint_6'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 -0.06 0 -0 0</pose>
+        <mass>0.99</mass>
+        <inertia>
+          <ixx>0.000345324</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000345324</iyy>
+          <iyz>0</iyz>
+          <izz>0.0005816</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_6_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/hand_3finger.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_6_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/hand_3finger.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='j2n6s300_link_6_visual_1'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/ring_small.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_1' type='revolute'>
+      <pose relative_to='j2n6s300_link_6'>0.00279 0.03126 -0.11467 -1.70479 0.647614 1.67317</pose>
+      <parent>j2n6s300_link_6</parent>
+      <child>j2n6s300_link_finger_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>1.51</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_1'>
+      <pose relative_to='j2n6s300_joint_finger_1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_1_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_1_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_tip_1' type='revolute'>
+      <pose relative_to='j2n6s300_link_finger_1'>0.044 -0.003 0 0 -0 0</pose>
+      <parent>j2n6s300_link_finger_1</parent>
+      <child>j2n6s300_link_finger_tip_1</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>2</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_tip_1'>
+      <pose relative_to='j2n6s300_joint_finger_tip_1'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_tip_1_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_tip_1_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_2' type='revolute'>
+      <pose relative_to='j2n6s300_link_6'>0.02226 -0.02707 -0.11482 -1.5708 0.649262 -1.38614</pose>
+      <parent>j2n6s300_link_6</parent>
+      <child>j2n6s300_link_finger_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>1.51</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_2'>
+      <pose relative_to='j2n6s300_joint_finger_2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_2_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_2_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_tip_2' type='revolute'>
+      <pose relative_to='j2n6s300_link_finger_2'>0.044 -0.003 0 0 -0 0</pose>
+      <parent>j2n6s300_link_finger_2</parent>
+      <child>j2n6s300_link_finger_tip_2</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>2</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_tip_2'>
+      <pose relative_to='j2n6s300_joint_finger_tip_2'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_tip_2_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_tip_2_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_3' type='revolute'>
+      <pose relative_to='j2n6s300_link_6'>-0.02226 -0.02707 -0.11482 -1.5708 0.649262 -1.75545</pose>
+      <parent>j2n6s300_link_6</parent>
+      <child>j2n6s300_link_finger_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>1.51</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_3'>
+      <pose relative_to='j2n6s300_joint_finger_3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_3_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_3_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_proximal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='j2n6s300_joint_finger_tip_3' type='revolute'>
+      <pose relative_to='j2n6s300_link_finger_3'>0.044 -0.003 0 0 -0 0</pose>
+      <parent>j2n6s300_link_finger_3</parent>
+      <child>j2n6s300_link_finger_tip_3</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>2</upper>
+          <effort>2</effort>
+          <velocity>1</velocity>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='j2n6s300_link_finger_tip_3'>
+      <pose relative_to='j2n6s300_joint_finger_tip_3'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.022 0 0 0 -0 0</pose>
+        <mass>0.01</mass>
+        <inertia>
+          <ixx>7.89997e-07</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>7.89997e-07</iyy>
+          <iyz>0</iyz>
+          <izz>8e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='j2n6s300_link_finger_tip_3_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='j2n6s300_link_finger_tip_3_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://j2n6s300/meshes/finger_distal.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <!-- <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <robotNamespace>j2n6s300</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <legacyModeNS>1</legacyModeNS>
+    </plugin>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_1_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_1</jointName>
+    </plugin>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_2_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_2</jointName>
+    </plugin>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_3_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_3</jointName>
+    </plugin>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_4_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_4</jointName>
+    </plugin>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_5_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_5</jointName>
+    </plugin>
+    <static>0</static>
+    <plugin name='ft_sensor' filename='libgazebo_ros_ft_sensor.so'>
+      <updateRate>30.0</updateRate>
+      <topicName>j2n6s300_joint_6_ft_sensor_topic</topicName>
+      <jointName>j2n6s300_joint_6</jointName>
+    </plugin> -->
+  </model>
+</sdf>
