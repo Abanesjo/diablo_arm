@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>imu_publisher</name>
+  <version>0.1.0</version>
+  <description>
+    Publishes IMU data read from the CM-730 board using the cm730controller node.
+  </description>
+  <maintainer email="find@mms.ai">Marcus M. Scheunemann</maintainer>
+  <license>Apache License 2.0</license>
+
+  <author>Marcus M. Scheunemann</author>
+  <author>Sander G. van Dijk</author>
+  
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cm730controller_msgs</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cm730controller_msgs</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

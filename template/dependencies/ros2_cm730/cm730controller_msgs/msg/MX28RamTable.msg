@@ -1,0 +1,5 @@
+uint16 present_position
+uint16 present_speed
+uint16 present_load
+uint8 present_voltage
+uint8 present_temperature

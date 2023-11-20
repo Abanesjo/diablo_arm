@@ -1,0 +1,548 @@
+<?xml version="1.0" ?>
+
+<robot name="boldbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- PLA: 1.24 g/cm^3 -->
+  <xacro:property name="filament_density_full" value="1240" />
+  <xacro:property name="infill" value=".5" />
+  <xacro:property name="filament_density" value="${filament_density_full * infill}" />
+  <xacro:property name="aluminium_density" value="2700" />
+
+  <xacro:property name="damping" value="0" />
+  <xacro:property name="friction" value="0.1" />
+
+  <xacro:macro name="xmass" params="value"><mass value="${value}" /></xacro:macro>
+  <!-- <xacro:macro name="xmass" params="value"><mass value="1" /></xacro:macro> -->
+
+  <xacro:macro name="inertial_cuboid" params="mass xyz rpy x_length y_length z_length">
+    <inertial>
+      <xacro:xmass value="${mass}" />
+      <origin rpy="${rpy}" xyz="${xyz}"/>
+      <inertia ixx="${mass * (y_length*y_length + z_length*z_length) / 12}" ixy="0.0" ixz="0.0"
+               iyy="${mass * (x_length*x_length + z_length*z_length) / 12}" iyz="0.0"
+               izz="${mass * (x_length*x_length + y_length*y_length) / 12}" />
+    </inertial>
+  </xacro:macro>
+
+  <!-- <xacro:macro name="inertial_cuboid" params="mass xyz rpy x_length y_length z_length"> -->
+  <!--   <inertial> -->
+  <!--     <xacro:xmass value="1" /> -->
+  <!--     <origin xyz="${xyz}" rpy="${rpy}"/> -->
+  <!--     <inertia ixx="${1 * (y_length*y_length + z_length*z_length) / 12}" ixy="0.0" ixz="0.0" -->
+  <!--              iyy="${1 * (x_length*x_length + z_length*z_length) / 12}" iyz="0.0" -->
+  <!--              izz="${1 * (x_length*x_length + y_length*y_length) / 12}" /> -->
+  <!--   </inertial> -->
+  <!-- </xacro:macro> -->
+
+  <xacro:macro name="mx28" params="name x y z rpy">
+    <link name="${name}">
+      <visual>
+        <origin xyz="${x} ${y} ${z}" rpy="${rpy}" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/mx28b.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="DarkGrey">
+          <color rgba="0.20 0.20 0.20 1.0"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="${x} ${y} ${z}" rpy="${rpy}" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/mx28b.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+      <xacro:inertial_cuboid mass="0.077" xyz="${x + 0.0105} ${y} ${z}" rpy="${rpy}" x_length="0.0506" y_length="0.0356" z_length="0.0355" />
+    </link>
+    <gazebo reference="${name}">
+      <material>Gazebo/DarkGrey</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+  </xacro:macro>
+
+  <!-- dummy first link, directly connects with torso -->
+  <link name="base_link" />
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="torso"/>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <link name="torso">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.1 0.109 0.045"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <box size="0.1 0.109 0.045"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_cuboid mass="0.31" xyz="0 0 0" rpy="0 0 0" x_length="0.1" y_length="0.109" z_length="0.045"/>
+  </link>
+  <gazebo reference="torso">
+    <material>Gazebo/Grey</material>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <joint name="torso-mx28-head-pan" type="fixed">
+    <parent link="torso" />
+    <child link="mx28-head-pan" />
+    <origin rpy="0 0 ${pi}" xyz="0.02 0 0.045" />
+  </joint>
+
+  <xacro:mx28 name="mx28-head-pan" x="0" y="0" z="0" rpy="0 0 0"/>
+
+  <joint name="head-pan" type="revolute">
+    <parent link="mx28-head-pan" />
+    <child link="neck" />
+    <origin rpy="0 0 ${-pi}" xyz="0 0 0.02" />
+    <axis xyz="0 0 1" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <dynamics damping="${damping}" friction="${friction}" />
+  </joint>
+
+  <link name="neck">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://boldbot_description/meshes/neckbracketb.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>>
+      <origin rpy="0 0 0" xyz="0 0 0" />
+      <geometry>
+        <mesh filename="package://boldbot_description/meshes/neckbracketb.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+    <!-- <inertial> -->
+    <!--   <origin xyz="0 0 0.009" /> -->
+    <!--   <mass value="0.024357719"/> -->
+    <!--   <inertia ixx="0.0051411124"  ixy="-0.00057530255"  ixz="-0.000024729049" iyy="0.0081915737" iyz="-0.000019223094" izz="0.0011379812" /> -->
+    <!-- </inertial> -->
+    <!-- mass doubled to increase stability -->
+    <xacro:inertial_cuboid mass="0.025" xyz="0 0 0.029" rpy="0 0 0" x_length="0.025" y_length="0.045" z_length="0.0325" />
+  </link>
+
+  <joint name="head-tilt" type="revolute">
+    <parent link="neck" />
+    <child link="mx28-head-tilt" />
+    <origin xyz="0 0 0.03" rpy="0 ${-pi / 2} ${-pi / 2}" />
+    <axis xyz="0 0 1" />
+    <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    <dynamics damping="${damping}" friction="${friction}" />
+  </joint>
+
+  <xacro:mx28 name="mx28-head-tilt" x="0" y="0" z="0" rpy="0 0 0"/>
+
+  <joint name="head-tilt-head" type="fixed">
+    <parent link="mx28-head-tilt" />
+    <child link="head" />
+    <origin xyz="0.065 0 0" rpy="${pi / 2} 0 ${pi / 2}" />
+  </joint>
+
+  <link name="head">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.1 0.04" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.1 0.04" />
+      </geometry>
+    </collision>
+    <xacro:inertial_cuboid mass="0.2" xyz="0 0 0" rpy="0 0 0" x_length="0.05" y_length="0.1" z_length="0.04" />
+  </link>
+  <gazebo reference="head">
+    <material>Gazebo/Grey</material>
+    <selfCollide>true</selfCollide>
+  </gazebo>
+
+  <joint name="head-gaze" type="fixed">
+    <parent link="head" />
+    <child link="gaze" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <link name="gaze">
+  </link>
+
+  <!-- Arms -->
+
+  <xacro:macro name="arm" params="side">
+    <xacro:property name="lr" value="${1 if side == 'l' else -1}" />
+
+    <joint name="torso-mx28-shoulder-pitch-${side}" type="fixed">
+      <parent link="torso" />
+      <child link="mx28-shoulder-pitch-${side}" />
+      <origin xyz="0.02 ${lr * 0.04} 0.045" rpy="${lr * pi / 2} 0 ${pi}" />
+    </joint>
+
+    <xacro:mx28 name="mx28-shoulder-pitch-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="shoulder-pitch-${side}" type="revolute">
+      <parent link="mx28-shoulder-pitch-${side}" />
+      <child link="shoulder-${side}" />
+      <origin xyz="0 0 0.02" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="shoulder-${side}">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 ${pi if side == 'l' else 0}" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/shoulderbracketb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <!-- <inertial> -->
+      <!--   <origin xyz="0 ${lr * -0.0025} 0.018" /> -->
+      <!--   <mass value="0.025913024"/> -->
+      <!--   <inertia ixx="0.0097758165"  ixy="0.0016911839"  ixz="-0.00045174329" iyx="0.0016911839" iyy="0.010511104" iyz="0.00033406955" izx="-0.00045174329" izy="0.00033406955" izz="0.005476798" /> -->
+      <!-- </inertial> -->
+      <xacro:inertial_cuboid mass="0.025" xyz="0 ${lr * -0.0025} 0.018" rpy="0 0 0" x_length="0.044" y_length="0.0332" z_length="0.038" />
+    </link>
+
+    <joint name="shoulder-roll-${side}" type="revolute">
+      <parent link="shoulder-${side}" />
+      <child link="mx28-shoulder-roll-${side}" />
+      <origin xyz="0 ${lr * -0.016} 0.025" rpy="${lr * pi / 2} ${-pi / 4} ${-lr * pi / 2}" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <xacro:mx28 name="mx28-shoulder-roll-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="mx28-shoulder-roll-${side}-mx28-elbow-${side}" type="fixed">
+      <parent link="mx28-shoulder-roll-${side}" />
+      <child link="mx28-elbow-${side}" />
+      <origin xyz="0.06 0 0.016" rpy="${-lr * pi / 2} ${pi / 2} 0"/>
+    </joint>
+
+    <xacro:mx28 name="mx28-elbow-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="elbow-${side}" type="revolute">
+      <parent link="mx28-elbow-${side}" />
+      <child link="lower-arm-${side}" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="lower-arm-${side}">
+      <visual>
+        <origin xyz="-0.055 ${-lr * 0.02} 0.02" rpy="${pi} 0 ${pi}"/>
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/armcoverb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="-0.055 ${-lr * 0.02} 0.02" rpy="${pi} 0 ${pi}"/>
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/armcoverb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cuboid mass="${2 * 0.000028534 * filament_density}" xyz="-0.085 ${-lr * 0.02} 0.014" rpy="0 0 0" x_length="0.1485" y_length="0.047" z_length="0.023" />
+    </link>
+    <gazebo reference="lower-arm-${side}">
+      <material>Gazebo/Grey</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+  </xacro:macro>
+
+  <xacro:arm side="l"/>
+  <xacro:arm side="r"/>
+
+  <!-- Legs -->
+
+  <xacro:macro name="leg" params="side">
+    <xacro:property name="lr" value="${1 if side == 'l' else -1}"/>
+
+    <joint name="torso-mx28-hip-yaw-${side}" type="fixed">
+      <parent link="torso" />
+      <child link="mx28-hip-yaw-${side}" />
+      <origin xyz="0.018 ${lr * 0.037} -0.04" rpy="${lr * 3.141592654} 0 3.141592654"/>
+    </joint>
+
+    <xacro:mx28 name="mx28-hip-yaw-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="hip-yaw-${side}" type="revolute">
+      <parent link="mx28-hip-yaw-${side}" />
+      <child link="hip-bracket-${side}" />
+      <origin xyz="0 0 0.02" rpy="0 0 ${-pi / 2}" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="hip-bracket-${side}">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/hipbracketb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/hipbracketb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_cuboid mass="0.025" xyz="0 0.003 0.009" rpy="0 0 0" x_length="0.027" y_length="0.0505" z_length="0.034" />
+      <!-- <inertial> -->
+      <!--   <origin xyz="0.000000 0.000480 0.0122437" /> -->
+      <!--   <mass value="0.025"/> -->
+      <!--   <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" -->
+      <!--            iyy="0.11066637" iyz="-0.0071635476" -->
+      <!--            izz="0.041877668" /> -->
+      <!-- </inertial> -->
+    </link>
+
+    <joint name="hip-roll-${side}" type="revolute">
+      <parent link="hip-bracket-${side}" />
+      <child link="mx28-hip-roll-${side}" />
+      <origin xyz="0 0.049 0.0315" rpy="${pi / 2} ${-pi / 2} 0" /> <!-- TODO: guessed -->
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <xacro:mx28 name="mx28-hip-roll-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="mx28-hip-roll-mx28-hip-pitch-${side}" type="fixed">
+      <parent link="mx28-hip-roll-${side}" />
+      <child link="mx28-hip-pitch-${side}" />
+      <origin xyz="0 0 0.05" rpy="${lr * pi / 2} 0 0" />
+      <axis xyz="0 0 1" />
+    </joint>
+
+    <xacro:mx28 name="mx28-hip-pitch-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="hip-pitch-${side}" type="revolute">
+      <parent link="mx28-hip-pitch-${side}" />
+      <child link="upper-leg-${side}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="upper-leg-${side}">
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 0" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/thighb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi / 2} 0 0" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/thighb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <!-- Mass and COM measured with Meshlab -->
+      <xacro:inertial_cuboid mass="${0.000051158 * filament_density}" xyz="0.067 0 0" rpy="0 0 0" x_length="0.117" y_length="0.025" z_length="0.0515" />
+    </link>
+    <gazebo reference="upper-leg-${side}">
+      <material>Gazebo/Grey</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+    <joint name="upper-leg-mx28-knee-${side}" type="fixed">
+      <parent link="upper-leg-${side}" />
+      <child link="mx28-knee-${side}" />
+      <origin xyz="0.143 0 0" rpy="0 0 ${pi}" />
+    </joint>
+
+    <xacro:mx28 name="mx28-knee-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="knee-${side}" type="revolute">
+      <parent link="mx28-knee-${side}" />
+      <child link="lower-leg-${side}" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="lower-leg-${side}">
+      <visual>
+        <origin xyz="-0.0175 ${-lr * 0.019} 0" rpy="${lr * pi / 2} 0 ${pi}" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/shinb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="-0.0175 ${-lr * 0.019} 0" rpy="${lr * pi / 2} 0 ${pi}" />
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/shinb.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+      <!-- Mass and COM measured with Meshlab -->
+      <xacro:inertial_cuboid mass="${0.000055347 * filament_density}" xyz="${-0.0175 -0.055} ${-lr * (0.019 - 0.013)} 0" rpy="0 0 0" x_length="0.1555" y_length="0.042" z_length="0.051" />
+    </link>
+    <gazebo reference="lower-leg-${side}">
+      <material>Gazebo/Grey</material>
+      <selfCollide>true</selfCollide>
+    </gazebo>
+
+    <joint name="ankle-pitch-${side}" type="revolute">
+      <parent link="lower-leg-${side}" />
+      <child link="mx28-ankle-pitch-${side}" />
+      <origin xyz="-0.143 0 0" rpy="${pi} 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <xacro:mx28 name="mx28-ankle-pitch-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="mx28-ankle-pitch-mx28-ankle-roll-${side}" type="fixed">
+      <parent link="mx28-ankle-pitch-${side}" />
+      <child link="mx28-ankle-roll-${side}" />
+      <origin xyz="0 ${-lr * 0.05} 0" rpy="${-lr * pi / 2} 0 0" />
+    </joint>
+
+    <xacro:mx28 name="mx28-ankle-roll-${side}" x="0" y="0" z="0" rpy="0 0 0"/>
+
+    <joint name="ankle-roll-${side}" type="revolute">
+      <parent link="mx28-ankle-roll-${side}" />
+      <child link="${side}_ankle" />
+      <origin xyz="0 0 0.05" rpy="${lr * pi} ${-pi / 2} 0" />
+      <axis xyz="1 0 0" />
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+      <dynamics damping="${damping}" friction="${friction}" />
+    </joint>
+
+    <link name="${side}_ankle">
+    </link>
+
+    <joint name="${side}_ankle_foot" type="fixed">
+      <parent link="${side}_ankle" />
+      <child link="foot-${side}" />
+      <origin xyz="0 0 -0.02" rpy="0 0 0" />
+    </joint>
+
+    <link name="foot-${side}">
+      <visual>
+        <origin xyz="0 ${lr * 0.01} 0" rpy="0 0 ${-pi / 2}" /> <!-- TODO: guessed y offset -->
+        <geometry>
+          <mesh filename="package://boldbot_description/meshes/nicefoot${side}b.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0.013 ${lr * (0.02)} 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.14 0.0935 0.012"/>
+        </geometry>
+        <!-- <origin xyz="-0.02 ${-lr * 0.01} 0.05" rpy="${pi / 2} 0 ${pi / 2}" /> <!-\- TODO: guessed y offset -\-> -->
+        <!-- <geometry> -->
+        <!--   <mesh filename="package://boldbot_description/meshes/nicefoot${side}b.stl" scale="0.001 0.001 0.001"/> -->
+        <!-- </geometry> -->
+      </collision>
+      <xacro:inertial_cuboid mass="${0.000062433 * filament_density}" xyz="0.013 ${lr * (0.01 + 0.0065)} -0.0023" rpy="0 0 0" x_length="0.14" y_length="0.0935" z_length="0.012" />
+      <!-- <inertial> -->
+      <!--   <origin xyz="${-0.02 - 0.0023} ${-lr * (0.01 + 0.0065)} ${0.05 + 0.013}" /> -->
+      <!--   <xacro:xmass value="0.1"/> -->
+      <!--   <inertia ixx="1e-3"  ixy="0.0"  ixz="0.0" iyy="1e-3" iyz="0.0" izz="1e-3" /> -->
+      <!-- </inertial> -->
+    </link>
+    <gazebo reference="foot-${side}">
+      <material>Gazebo/Grey</material>
+      <selfCollide>true</selfCollide>
+      <kp>1000000.0</kp>
+      <kd>100.0</kd>
+      <mu1>1.0</mu1>
+      <mu2>1.0</mu2>
+      <maxVel>0.5</maxVel>
+      <minDepth>0.002</minDepth>
+    </gazebo>
+
+    <joint name="${side}_ankle_sole" type="fixed">
+      <parent link="${side}_ankle" />
+      <child link="${side}_sole" />
+      <origin xyz="0.013 ${lr * (0.02)} ${-0.02 - 0.006}" rpy="0 0 0" />
+    </joint>
+
+    <link name="${side}_sole">
+    </link>
+
+    <joint name="${side}_sole_toe" type="fixed">
+      <parent link="${side}_sole" />
+      <child link="${side}_toe" />
+      <origin xyz="0.07 0 0" rpy="0 0 0" />
+    </joint>
+
+    <link name="${side}_toe">
+    </link>
+  </xacro:macro>
+
+  <xacro:leg side="l"/>
+  <xacro:leg side="r"/>
+
+  <gazebo>
+    <plugin name="boldbot_gazebo" filename="libboldbot_gazebo_plugin.so">
+    </plugin>
+  </gazebo>
+
+  <gazebo reference="head">
+    <sensor name='camera' type='camera'>
+      <pose>0 0 0 0 0 0</pose>
+      <camera name='__default__'>
+        <horizontal_fov>1.012300</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+        </image>
+        <clip>
+          <near>0.001000</near>
+          <far>100.000000</far>
+        </clip>
+      </camera>
+      <always_on>1</always_on>
+      <update_rate>30</update_rate>
+      <visualize>false</visualize>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30</updateRate>
+        <cameraName>darwin/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+ <gazebo reference="torso">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>125</update_rate>
+      <!-- <visualize>true</visualize> -->
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <ros>
+          <argument>~/out:=/imu/data_raw</argument>
+        </ros>
+        <bodyName>torso</bodyName>
+        <gaussianNoise>0.0</gaussianNoise>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+</robot>

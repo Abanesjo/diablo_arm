@@ -1,0 +1,6 @@
+uint8 device_id
+uint8 address
+uint8[] data
+---
+std_msgs/Header header
+uint16 error

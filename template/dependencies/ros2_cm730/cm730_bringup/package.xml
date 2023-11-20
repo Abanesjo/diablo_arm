@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>cm730_bringup</name>
+  <version>0.0.0</version>
+  <description>
+    Launch files and composed nodes to orchestrate CM-730 related
+    nodes.
+  </description>
+  <maintainer email="sgvandijk@gmail.com">sander</maintainer>
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>cm730driver</build_depend>
+  <build_depend>cm730controller</build_depend>
+  <build_depend>mx_joint_controller</build_depend>
+  <build_depend>imu_publisher</build_depend>
+
+  <exec_depend>launch</exec_depend>
+  <exec_depend>cm730driver</exec_depend>
+  <exec_depend>cm730controller</exec_depend>
+  <exec_depend>mx_joint_controller</exec_depend>
+  <exec_depend>imu_publisher</exec_depend>
+  
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>mx_joint_controller</name>
+  <version>0.1.0</version>
+  <description>
+    Controls MX servo joints joints and publishes their states, using
+    the cm730controller.
+  </description>
+  <maintainer email="sgvandijk@gmail.com">Sander G. van Dijk</maintainer>
+  <license>Apache License 2.0</license>
+
+  <author>Sander G. van Dijk</author>
+
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cm730controller_msgs</build_depend>
+  <build_depend>mx_joint_controller_msgs</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>cm730controller_msgs</exec_depend>
+  <exec_depend>mx_joint_controller_msgs</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

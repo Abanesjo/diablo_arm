@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+  <world name="default">
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <light name="spotlight" type="spot">
+      <pose>0 0 10  0 0 0</pose>
+      <spot>
+        <inner_angle>0.6</inner_angle>
+        <outer_angle>2.0</outer_angle>
+        <falloff>1.0</falloff>
+      </spot>
+    </light>
+    
+    <model name="field">
+      <pose>0 0 0.01  0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_field_kid_2019.dae</uri></mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_field_kid_2019.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="goal1">
+      <pose>4.5 0 0.01  0 0 0</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_goal_2019.dae</uri></mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_goal_2019.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="goal2">
+      <pose>-4.5 0 0.01  0 0 3.14159265359</pose>
+      <static>true</static>
+      <link name="body">
+        <visual name="visual">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_goal_2019.dae</uri></mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <mesh><uri>model://boldbot_sim/meshes/rchl_goal_2019.dae</uri></mesh>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <model name="ball">
+      <pose>0 0 0.1  0 0 0</pose>
+      <static>false</static>
+      <link name="body">
+        <velocity_decay><angular>0.001</angular></velocity_decay>
+        <visual name="visual">
+          <geometry>
+            <mesh>
+              <uri>model://boldbot_sim/meshes/ball.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <pose>0 0 0  0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.07</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <bounce>
+              <restitution_coefficient>0.5</restitution_coefficient>
+              <threshold>0</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <max_vel>10</max_vel>
+              </ode>
+            </contact>
+          </surface>
+        </collision>
+        <inertial>
+          <pose>0 0 0  0 0 0</pose>
+          <mass>0.170</mass>
+          <inertia>
+            <ixx>0.000555333</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.000555333</iyy>
+            <iyz>0</iyz>
+            <izz>0.000555333</izz>
+          </inertia>
+        </inertial>
+      </link>
+    </model>
+  </world>
+</sdf>

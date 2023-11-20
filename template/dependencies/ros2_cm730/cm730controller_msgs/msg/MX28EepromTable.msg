@@ -1,0 +1,17 @@
+uint16 model_number
+uint8 version
+uint8 id 
+uint8 baud_rate
+uint8 return_delay_time
+uint16 cw_angle_limit
+uint16 ccw_angle_limit
+uint8 high_limit_temperature
+uint8 low_limit_voltage
+uint8 high_limit_voltage
+uint16 max_torque
+uint8 return_level
+uint8 alarm_led
+uint8 alarm_shutdown
+uint8 operating_mode
+uint16 low_calibration
+uint16 high_calibration

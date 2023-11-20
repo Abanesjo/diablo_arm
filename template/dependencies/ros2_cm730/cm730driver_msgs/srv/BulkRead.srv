@@ -1,0 +1,6 @@
+# Requests for all separate devices
+RangeReadRequest[] read_requests
+---
+std_msgs/Header header
+uint16 error
+RangeReadResult[] results

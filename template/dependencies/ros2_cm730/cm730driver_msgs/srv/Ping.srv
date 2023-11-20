@@ -1,0 +1,4 @@
+uint8 device_id
+---
+std_msgs/Header header
+uint16 error

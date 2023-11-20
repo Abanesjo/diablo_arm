@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format2.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="2">
+  <name>cm730driver</name>
+  <version>0.1.0</version>
+  <description>
+    Driver node that communicates with the CM-730 subcontroller and
+    exposes a service that maps the Dynamixel serial protocol ro ROS 2
+    services.
+  </description>
+  <maintainer email="sgvandijk@gmail.com">Sander G. van Dijk</maintainer>
+  <license>Apache License 2.0</license>
+
+  <author>Sander G. van Dijk</author>
+
+  <buildtool_depend>ament_cmake_ros</buildtool_depend>
+
+  <build_depend>rclcpp</build_depend>
+  <build_depend>cm730driver_msgs</build_depend>
+
+  <build_export_depend>cm730driver_msgs</build_export_depend>
+  
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>cm730driver_msgs</exec_depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

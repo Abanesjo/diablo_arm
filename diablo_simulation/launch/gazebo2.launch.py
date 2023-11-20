@@ -24,6 +24,7 @@ def generate_launch_description():
         ]),
         launch_arguments={
             'pause': 'true',
+            'debug': 'true',
             'world': world_path
         }.items()
     )

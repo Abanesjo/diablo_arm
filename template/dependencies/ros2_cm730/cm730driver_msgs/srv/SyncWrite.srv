@@ -1,0 +1,11 @@
+# Start address of data for all devices
+uint8 address
+
+# Bytes to write for each device
+uint8 length
+
+# Requests for all separate devices
+RangeWriteRequest[] write_requests
+---
+std_msgs/Header header
+uint16 error
