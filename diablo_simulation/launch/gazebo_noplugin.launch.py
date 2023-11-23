@@ -8,7 +8,7 @@ from launch.substitutions import PathJoinSubstitution
 def generate_launch_description():
     share_dir = FindPackageShare(package='diablo_simulation').find('diablo_simulation')
 
-    world_file_name = 'diablo.world'
+    world_file_name = 'diablo_noplugin.world'
     world_path = os.path.join(share_dir, 'worlds', world_file_name)
 
     gazebo_models_path = os.path.join(share_dir, 'models')

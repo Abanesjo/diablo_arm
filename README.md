@@ -21,9 +21,3 @@ ros2 launch diablo_simulation gazebo.launch.py
 You should see the robot appear in the Gazebo simulation window
 
 ![diablo_arm.png](/docs/diablo_arm.png "Diablo with Arm")
-
-## Template
-This package follows the boldbot simulation template. To test it, use the following command:
-```
-ros2 launch boldbot_sim boldbot_sim_bringup.launch.py
-```
