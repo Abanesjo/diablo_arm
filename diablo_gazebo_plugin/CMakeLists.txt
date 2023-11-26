@@ -44,16 +44,18 @@ ament_target_dependencies(low_ctrl_plugin
   "geometry_msgs"
 )
 
+add_library(sample_plugin SHARED src/sample_plugin.cpp)
+target_include_directories(sample_plugin PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+ament_target_dependencies(sample_plugin
+  "gazebo_ros"
+  "std_msgs")
+
 install (TARGETS
-  generic_motor_plugin low_ctrl_plugin
+  generic_motor_plugin low_ctrl_plugin sample_plugin
   DESTINATION share/${PROJECT_NAME})
-
-# add_executable(talker src/talker.cpp)
-# ament_target_dependencies(talker rclcpp std_msgs geometry_msgs gazebo_ros)
-
-# install(TARGETS
-#   talker
-#   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

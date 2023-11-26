@@ -1249,7 +1249,7 @@
         <update_rate>1000</update_rate>
         <pose>0 0 0 0 -0 0</pose>
 			<topic>__default_topic__</topic>
-		    <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+		    <!-- <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
 		      <topicName>imu</topicName>
 		      <bodyName>imu_link</bodyName>
 		      <updateRateHZ>1000.0</updateRateHZ>
@@ -1258,7 +1258,7 @@
 		      <rpyOffset>0 0 0</rpyOffset>
 		      <frameName>imu_link</frameName>
 		      <initialOrientationAsReference>false</initialOrientationAsReference>
-		    </plugin>
+		    </plugin> -->
       </sensor>
     </link>
     <!-- <plugin name="low_lvl_controller" filename="liblow_ctrl_plugin.so">

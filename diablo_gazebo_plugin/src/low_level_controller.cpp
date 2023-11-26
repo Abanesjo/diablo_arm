@@ -37,6 +37,7 @@ class DiabloControlPlugin: public gazebo::ModelPlugin
 
     void Load(gazebo::physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
+      nh = gazebo_ros::Node::Get(_sdf);
       this->model = _parent;	
 	  	smooth_x_vel = 0.0;		
 	  	this->lin_x_cmd = 0.0;

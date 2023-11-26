@@ -32,6 +32,7 @@ public:
 
     void Load(physics::ModelPtr _parent, sdf::ElementPtr _sdf)
     {
+        nh = gazebo_ros::Node::Get(_sdf);
         this->model = _parent;			
 		this->mode = 0; //default mode is position
 		this->cmd = 0.0;

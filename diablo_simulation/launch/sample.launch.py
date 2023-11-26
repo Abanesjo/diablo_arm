@@ -8,11 +8,15 @@ from launch.substitutions import PathJoinSubstitution
 def generate_launch_description():
     share_dir = FindPackageShare(package='diablo_simulation').find('diablo_simulation')
 
-    world_file_name = 'diablo_noplugin.world'
+    world_file_name = 'sample.world'
     world_path = os.path.join(share_dir, 'worlds', world_file_name)
 
     gazebo_models_path = os.path.join(share_dir, 'models')
     os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
+    plugins_dir = FindPackageShare(package='diablo_gazebo_plugin').find('diablo_gazebo_plugin')
+    gazebo_plugins_path = os.path.join(plugins_dir, 'diablo_gazebo_plugin')
+    os.environ["GAZEBO_PLUGIN_PATH"] = gazebo_plugins_path
 
     gazebo_server = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
