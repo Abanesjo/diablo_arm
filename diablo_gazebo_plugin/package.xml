@@ -4,9 +4,9 @@
   <name>diablo_gazebo_plugin</name>
   <version>0.1.0</version>
   <description>
-    Plugin to interact with the BoldBot Gazebo model
+    Plugins for the Diablo Balance Robot
   </description>
-  <maintainer email="sgvandijk@gmail.com">Sander G. van Dijk</maintainer>
+  <maintainer email="jya9538@nyu.edu">John Abanes</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>

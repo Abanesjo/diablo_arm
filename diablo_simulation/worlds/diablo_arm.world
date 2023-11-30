@@ -9,7 +9,7 @@
     </include>
 
   <include>
-		<uri>model://diablo_noarm</uri>
+		<uri>model://diablo_arm</uri>
 		<static>0</static>
 	</include>
   <physics type='ode'>

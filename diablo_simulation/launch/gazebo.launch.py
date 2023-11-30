@@ -28,9 +28,9 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={
-            'pause': 'true',
+            'pause': 'false',
             'world': world_path,
-            'verbose': 'true'
+            'verbose': 'false'
         }.items()
     )
 
@@ -54,7 +54,6 @@ def generate_launch_description():
         output='screen',
         prefix='xterm -e'
     )
-
     return LaunchDescription([
         gazebo_server,
         gazebo_client,

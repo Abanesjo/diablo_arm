@@ -9,7 +9,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     share_dir = FindPackageShare(package='diablo_simulation').find('diablo_simulation')
 
-    world_file_name = 'diablo_noarm.world'
+    world_file_name = 'diablo_arm.world'
     world_path = os.path.join(share_dir, 'worlds', world_file_name)
 
     gazebo_models_path = os.path.join(share_dir, 'models')
@@ -30,7 +30,7 @@ def generate_launch_description():
         launch_arguments={
             'pause': 'true',
             'world': world_path,
-            'verbose': 'true'
+            'verbose': 'false'
         }.items()
     )
 
@@ -44,18 +44,7 @@ def generate_launch_description():
         ])
     )
 
-    teleop_node = Node(
-        name='teleop_keyboard',
-        package='teleop_twist_keyboard',
-        executable='teleop_twist_keyboard',
-        remappings=[
-            ('/cmd_vel', '/diablo/diablo/vel_cmd')
-        ],
-        output='screen',
-        prefix='xterm -e'
-    )
     return LaunchDescription([
         gazebo_server,
         gazebo_client,
-        teleop_node
     ])
